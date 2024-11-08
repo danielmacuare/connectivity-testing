@@ -39,6 +39,16 @@ def setup_logging():
     )
 
 
+def output_result(ip_addresses):
+    results = ip_addresses
+
+    result_file_path = os.path.join(RESULTS_DIRECTORY, "ips.txt")
+    with open(result_file_path, "w") as f:
+        for result in results:
+            f.write(f"{result}\n")
+    logging.info(f"Results written to {result_file_path}")
+
+
 def main():
     setup_logging()
     ensure_directory_exists(RESULTS_DIRECTORY)
@@ -49,6 +59,7 @@ def main():
 
     ip_addresses = extract_ip_addresses(FILE_PATH, COLUMN_NAME)
     print(ip_addresses)
+    output_result(ip_addresses)
 
 
 if __name__ == "__main__":
